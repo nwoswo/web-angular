@@ -1,0 +1,208 @@
+<div>
+
+
+
+    <form class="form-horizontal" id="add-form" #heroForm="ngForm" (submit)="onSubmit(heroForm)" novalidate>
+        <div class="modal-header">
+            <h5 class="modal-title">Datos Usuario</h5>
+
+        </div>
+
+
+        <div class="modal-body">
+
+            <div class="form-row">
+
+                <div class="col-md-4 mb-3">
+                    <label class="col-sm-2 control-label">Nombre</label>
+                    <input type="text" class="form-control text-uppercase" id="traDNombres" [(ngModel)]="usuario.gpecPersona.traDNombres" name="traDNombres" #traDNombres="ngModel" [ngClass]="{ 'is-invalid': heroForm.submitted && traDNombres.invalid }" required minlength="3"
+                        maxlength="20" />
+
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label>Apelido Paterno</label>
+                    <input type="text" class="form-control text-uppercase" id="traDApepat" required [(ngModel)]="usuario.gpecPersona.traDApepat" name="traDApepat" #traDApepat="ngModel" [ngClass]="{ 'is-invalid': heroForm.submitted && traDApepat.invalid }" required minlength="3"
+                        maxlength="20" />
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label>Apelido Materno</label>
+                    <input type="text" class="form-control text-uppercase" id="traDApemat" required [(ngModel)]="usuario.gpecPersona.traDApemat" name="traDApemat" #traDApemat="ngModel" [ngClass]="{ 'is-invalid': heroForm.submitted && traDApemat.invalid }" required minlength="3"
+                        maxlength="20" />
+                </div>
+
+
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label>Nro Dni</label>
+                    <input type="text" class="form-control" [(ngModel)]="usuario.gpecPersona.traNNrodoc" name="traNNrodoc" #traNNrodoc="ngModel" [ngClass]="{ 'is-invalid': heroForm.submitted && traNNrodoc.invalid  }" required pattern="[0-9]*" minlength="8" maxlength="8"
+                    />
+                    <div *ngIf="heroForm.submitted && traNNrodoc.invalid" class="invalid-feedback">
+                        <div *ngIf="traNNrodoc.errors.pattern">Solo Numeros</div>
+                        <div *ngIf="traNNrodoc.errors.minlength">Minimo 8 digitos </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label>Celular</label>
+                    <input type="text" class="form-control" [(ngModel)]="usuario.gpecPersona.traNCelular" name="traNCelular" #traNCelular="ngModel" [ngClass]="{ 'is-invalid': heroForm.submitted && traNCelular.invalid  }" required pattern="[0-9]*" minlength="8"
+                        maxlength="10" />
+                    <div *ngIf="heroForm.submitted && traNCelular.invalid" class="invalid-feedback">
+                        <div *ngIf="traNCelular.errors.pattern">Solo Numeros</div>
+                        <div *ngIf="traNCelular.errors.minlength">Minimo 8 digitos </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <div class="row">
+                        <div class="col ">
+                            <div>
+                                <label>Genero</label>
+                            </div>
+                            <div class="form-check form-check-inline aling " *ngFor="let gender of genders">
+
+                                <input type="radio" name="traCSexos" #traCSexos="ngModel" [(ngModel)]="usuario.gpecPersona.traCSexos" [value]="gender.value" required />{{gender.display}}</div>
+
+                            <div class="text-danger" style="font-size: 13px" *ngIf="heroForm.submitted && heroForm.invalid && !usuario.gpecPersona.traCSexos">
+                                <p>Seleccione Tipo de Sexualidad</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div>
+                Datos de Acceso
+            </div>
+            <hr>
+            <div class="form-row">
+
+                <div class="col-md-4 mb-3">
+                    <label>Usuario</label>
+                    <input type="text" class="form-control text-uppercase" id="usuCUsuario" [(ngModel)]="usuario.usuDUsuario" name="usuDUsuario" #usuDUsuario="ngModel" [ngClass]="{ 'is-invalid': heroForm.submitted && usuDUsuario.invalid }" required minlength="5" maxlength="20"
+                    />
+                    <div *ngIf="heroForm.submitted && usuDUsuario.invalid" class="invalid-feedback">
+                        <div *ngIf="usuDUsuario.errors.minlength">Minimo 5 digitos </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-4 mb-3">
+
+                    <div class="row">
+                        <div class="col">
+                            <div>
+                                <label>Tipo Usuario</label>
+                            </div>
+
+
+                            <select class="form-control" name="areCArea" [(ngModel)]="usuario.tracArea.areCArea" #areCArea="ngModel" required>
+                                  <option *ngFor="let role of roles" [value]="role.areCArea" >
+                                    {{role.areDNombre}}
+                                  </option>
+                            </select>
+                            <div class="text-danger" style="font-size: 13px" *ngIf="areCArea.invalid">
+                                Seleccione Area
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <ng-template [ngIf]="this.vsubmit==1">
+
+                    <label>PassWord</label>
+                    <input type="password" class="form-control" id="usuDPassword" [(ngModel)]="usuario.usuDPassword" name="usuDPassword" #usuDPassword="ngModel" 
+                    [ngClass]="{ 'is-invalid': heroForm.submitted && usuDPassword.invalid }" required minlength="5" maxlength="15" autocomplete="of" />
+
+                    <div *ngIf="heroForm.submitted && usuDPassword.invalid" class="invalid-feedback">
+                        <div *ngIf="usuDPassword.errors.required">Password is required</div>
+                        <div *ngIf="usuDPassword.errors.minlength">Password must be at least 5 characters</div>
+                    </div>
+                  </ng-template>
+
+            </div>
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="form-row">
+
+              <div class="col-md-4 mb-3">
+
+                <div class="row">
+                    <div class="col">
+                        <div>
+                            <label>Departamento</label>
+                        </div>
+
+
+                        <select class="form-control" name="usuNUbigeo" [(ngModel)]="usuario.usuNUbigeo" #usuNUbigeo="ngModel" required>
+                              <option *ngFor="let item of departamento" [value]="item.cod" >
+                                {{item.value}}
+                              </option>
+                        </select>
+                        <div class="text-danger" style="font-size: 13px" *ngIf="usuNUbigeo.invalid">
+                            Seleccione Departamento
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-dismiss="modal" (click)="activeModal.dismiss()">Cerrar</button>
+            <button type="submit"  class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+</div>

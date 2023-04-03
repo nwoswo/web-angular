@@ -1,0 +1,60 @@
+
+
+    <nav aria-label="breadcrumb " >
+        <ol class="breadcrumb d-flex justify-content-center unique-color ">
+
+          <li class="breadcrumb-item active text-white "  aria-current="page"> APROBACIÓN  SOLICITUD DE TRANSPARENCIA</li>
+
+
+        </ol>
+      </nav>
+
+
+
+<div class="row m-3">
+
+  <div class="col-4">
+
+    <div class="card text-white unique-color mb-3" style="max-width: 18rem;">
+      <div class="card-header">APROBAR SOLICITUD</div>
+      <div class="card-body">
+        <h5 class="card-title">Proceso</h5>
+        <p class="card-text text-white">Aprobar la solicitud, lo siguiente es elaborar y remitir Oficio de Acuse .</p>
+      </div>
+    </div>
+
+
+    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+      <div class="card-header">NO ES TRANSPARENCIA</div>
+      <div class="card-body">
+        <h5 class="card-title">Proceso</h5>
+        <p class="card-text text-white">Desaprobar la solicitud, lo siguiente es Elaborar y remitir Carta de Acuse .</p>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-8">
+
+      <div class="row">
+
+          <div class="col">
+              <label>Observaciones </label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+
+          </div>
+
+
+
+        </div>
+
+        <div class="modal-footer  d-flex justify-content-center">
+            <button type="button" class="btn unique-color text-white" (click)="confirm()" > SÍ CALIFICA COMO TRANSPARENCIA</button>
+            <button type="submit" class="btn btn-blue-grey text-white" (click)="decline()">NO CALIFICA COMO  TRANSPARENCIA</button>
+             <button type="submit" class="btn btn-blue-grey text-white" (click)="activeModal.dismiss()">CERRAR VENTANA</button>
+          </div>
+
+
+  </div>
+</div>
+
+

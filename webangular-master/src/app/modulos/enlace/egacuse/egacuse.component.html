@@ -1,0 +1,86 @@
+<div *ngIf="!cargando">
+
+  <div class="d-flex justify-content-center ">
+      <h6><p class="d-flex justify-content-center" > <strong>ELABORAR REMITIR  OFICIO / ACUSE  </strong></p> </h6>
+    </div>
+  <div class="w-100 d-flex justify-content-center">
+
+    <div class="w-50">
+      <form  [formGroup]="myForm"  (ngSubmit)="generarAcuse()" novalidate>
+          <div class="form-group row "  >
+            <label  class="col-4 col-form-label" >Ingrese Nro de Oficio</label>
+
+            <div class="col-6">
+              <input type="text" class="form-control" formControlName="fOficio" name="oficio"  >
+            </div>
+          </div>
+
+
+
+          <div class="form-group row">
+            <div class="col-sm-12 d-flex justify-content-center">
+              <button type="submit" [disabled]="!myForm.valid" class="btn btn-primary" >GENERAR ACUSE  </button>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+
+
+
+
+
+  <hr>
+
+
+
+
+
+
+  <div class="d-flex justify-content-center " data-toggle="tooltip" title="VISTA PREVIA DEL DOCUMENTO DE ACUSE">
+  <div class="card p-3 w-75 ">
+    <div class="card-body ">
+
+      <h5 class="card-title border p-2">
+          <h5><p class="d-flex justify-content-center" > <strong>Comisión Ad Hoc creada por la Ley N° 29625 </strong></p> </h5>
+          <h6><p class="d-flex justify-content-center"> "Ley de Devolucion de Dinero del FONAVI  a los Trabajadores que Contribuyeron al Mismo"</p></h6>
+      </h5>
+
+    </div>
+    <ul class="list-unstyled" style="font-size: 11px">
+
+        <li class="font-weight-bold"> Sr(a): {{myitem.perDApepat}} {{myitem.perDApemat}} {{myitem.perDNombre}} </li>
+        <li class="font-weight-bold"> {{myitem.perDUrbanizacion}} {{myitem.perDCalleave}} {{myitem.perDInterior}} </li>
+        <li class="font-weight-bold"> {{myitem.dedDDepart}} -  {{myitem.prdDProvi}} -  {{myitem.didDDistrito}} </li>
+        <li class="d-flex justify-content-end"> Expediente N° : {{myitem.solNHoja}} </li>
+        <li> Adjunto al presente, le remitimos  su <strong>OFICIO CIRCULAR N° {{myForm.controls.fOficio.value}} </strong> </li>
+        <li class="d-flex justify-content-end"> Lima {{datehoy  | date:'fullDate'}} </li>
+
+
+      </ul>
+      <br/>
+      <ul class="list-unstyled w-25" style="font-size: 11px;">
+
+
+          <li class="d-flex justify-content-end" >
+              <span class="border-top ">Recibi Conforme </span>
+          </li>
+        </ul>
+
+  </div>
+
+  </div>
+</div>
+
+
+<div *ngIf="cargando"
+     class="alert alert-info text-center mt-3 animated fadeIn faster">
+  <h4 class="alert-heading">Cargando ....... </h4>
+
+  <p class="mb-0">
+    Espere por favor
+  </p>
+</div>
+
+
+

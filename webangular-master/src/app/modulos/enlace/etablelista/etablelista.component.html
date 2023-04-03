@@ -1,0 +1,135 @@
+<div>
+
+    <table class="table table-sm" >
+
+        <thead>
+            <tr>
+
+                <th scope="col" style="width: 8%">
+                    <p class="font-weight-bolder"> # H Ruta </p>
+                </th>
+
+                <th scope="col" style="width: 10%">
+                  <p class="font-weight-bolder"> Estado </p>
+                </th>
+                <th scope="col" style="width: 10%">
+                    <p class="font-weight-bolder"> Origen </p>
+                  </th>
+
+                <th scope="col" style="width: 25%">
+                    <p class="font-weight-bolder"> Nombre del Solicitante </p>
+                </th>
+                <th scope="col" style="width: 7%">
+                    <p class="font-weight-bolder">Presenta </p>
+                </th>
+
+                <th scope="col" style="width: 7%">
+                    <p class="font-weight-bolder"> F. Actual </p>
+                </th>
+
+                <th scope="col" style="width: 5%">
+                    <p class="font-weight-bolder"> Días </p>
+                </th>
+
+                <th scope="col" style="width: 15%">
+                    <p class="font-weight-bolder"> R. Información </p>
+                </th>
+
+                <th scope="col" style="width: 15%">
+                    <p class="font-weight-bolder"> Detalle </p>
+                </th>
+
+                <th scope="col" style="width: 5%">
+                    <p class="font-weight-bolder"> Archivos  </p>
+                </th>
+
+
+
+            </tr>
+        </thead>
+        <tbody >
+
+
+            <tr *ngFor="let p of items ">
+
+                <td>
+                    <input type="radio" name="id_lista" id="id_lista" value="{{p.solNHoja}}" (change)="inItemChange(p)" />
+                    {{p.solNHoja}}
+                </td>
+
+
+
+                <td class="font-weight-bold" style="font-size: 12px" >
+                  <ng-template [ngIf]="p.solCEcalificacion===1">
+                      <a class="badge badge-primary">Transparencia</a>
+                  </ng-template>
+                  <ng-template [ngIf]="p.solCEcalificacion===2">
+                      <a class="badge badge-danger">No Transparencia</a>
+                  </ng-template>
+                  <ng-template [ngIf]="p.solCEcalificacion!=2 && p.solCEcalificacion!=1">
+                      <a class="badge badge-warning">  Sin Calificación</a>
+                  </ng-template>
+                </td>
+
+                <td class="font-weight-bold" style="font-size: 10px" >
+                    <ng-template [ngIf]="p.solCOrigen===1">M. PARTES</ng-template>
+                    <ng-template [ngIf]="p.solCOrigen===10">PLATAFORMA</ng-template>
+                  </td>
+
+
+                <td *ngIf="p.perCTipodoc==='DNI'  || p.perCTipodoc==='LE' "  (click)=" vDetalleSolicitud(p)"  > {{p.perCTipodoc}} {{p.perNNrodoc}} {{p.perDNombre}} {{p.perDApepat}} {{p.perDApemat}}</td>
+                <td *ngIf="p.perCTipodoc==='RUC'"  (click)=" vDetalleSolicitud(p)" >  {{p.perCTipodoc}} {{p.perNNrodoc}} {{p.perDRazonSocial}} </td>
+
+
+
+
+                <td class="text-danger font-weight-bold" style="font-size: 12px" >{{ p.solFRegistro  }} </td>
+                <td (click)=" vDetalleSolicitud(p)" style="font-size: 12px">{{today  | date:'dd-MM-yyyy '}}  </td>
+                <td class="text-danger font-weight-bold" >{{p.nrodias }} </td>
+                <td  style="font-size: 9px;text-align:center;">
+
+                    <div *ngIf="p.nroreq>0"  style="font-size: 14px;text-align: left"  >
+
+                        <a class="badge badge-primary">Solicitados {{p.nroreq}}  </a>
+                        <br>
+                        <a class="badge badge-success">Contestados {{p.nroreqresp}} </a>
+
+
+
+                    </div>
+
+
+                </td>
+                <td style="font-size: 9px;text-align: center">
+
+
+                    <div *ngIf="p.solESolicitud==2" class="alert alert-danger d-flex justify-content-center font-weight-bold"
+                        role="alert">
+                        PENDIENTE ATENCIÓN
+                    </div>
+                    <div *ngIf="p.solESolicitud==3" class="alert alert-warning d-flex justify-content-center font-weight-bold"
+                        role="alert">
+                        PENDIENTE ELABORACIÓN OFICIO
+                    </div>
+                    <div *ngIf="p.solESolicitud==4" class="alert alert-success d-flex justify-content-center font-weight-bold"
+                        role="alert">
+                        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                        SOLICITUD CON RESPUESTA -  PENDIENTE DE DERIVACIÓN
+                    </div>
+                    <div *ngIf="p.solESolicitud==7" class="alert alert-danger d-flex justify-content-center font-weight-bold"
+                        role="alert">
+                        NO CALIFICA COMO TRANSPARENCIA
+                    </div>
+
+                </td>
+                <td   class="text-center ">
+
+                    <i *ngIf="p.nroArchivos>0 " class="fa fa-file-text-o fa-2x"   (click)="elistararchivo(p)" aria-hidden="true"></i>
+
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</div>

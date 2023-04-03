@@ -1,0 +1,137 @@
+
+<form class="form-horizontal" [formGroup]="myForm" (ngSubmit)="onSubmit()" novalidate>
+<div  class="row d-flex justify-content-center mt-3">
+
+  
+  <div class="w-75">
+    <div class="alert alert-secondary "  role="alert">
+      BUSCADOR DE ARCHIVO : {{tipoBusqueda}}
+    </div>
+    
+    <div class="row no-pad" >
+    
+      
+      <div class="col-2">
+        <label>T DOC</label>
+        <select class="form-select form-select-sm"  formControlName="tDocumento"
+        [ngClass]="{ 'is-invalid':  myForm.controls.tDocumento.errors }">
+          
+          <option value="RUC">RUC</option>
+          <option value="RUC">DNI</option>
+        </select>
+      </div>
+    
+      <div class="col-2 ">
+        <label>NUMERO DOC</label>
+        <input type="text" class="form-control form-control-sm " formControlName="numero" 
+        (keyup)="myonBlurNumero()"  (keypress)="numericOnly($event)" 
+        [ngClass]="{ 'is-invalid':  myForm.controls.numero.errors }" />
+        <div *ngIf="myForm.controls.numero.errors"  class="invalid-feedback" >
+          minimo 11 caracteres
+        </div>
+      </div>
+    
+      <div class="col-6">
+        <label>RAZON SOCIAL</label>
+        <input type="text" class="form-control form-control-sm text-uppercase" formControlName="razonsocial" 
+        (keyup)="myonBlurRazonSocial()"  [ngClass]="{ 'is-invalid':  myForm.controls.razonsocial.errors }" />
+        <div *ngIf="myForm.controls.razonsocial.errors"  class="invalid-feedback" >
+          minimo 8 caracteres
+        </div>
+
+      </div>
+    
+      <div class="col-2 pe-3  ">
+        <label>DOCUMENTO</label>
+        <input type="text" class="form-control form-control-sm text-uppercase"  formControlName="documento" 
+        (keyup)="myonBlurDocumento()"  [ngClass]="{ 'is-invalid':  myForm.controls.documento.errors }" />
+        <div *ngIf="myForm.controls.documento.errors"  class="invalid-feedback" >
+          minimo 8 caracteres
+        </div>
+
+      </div>
+      
+    
+    </div>
+    <!-- {{myForm.valid}}  - {{vsubmit}} -->
+    <div class="row"> 
+      <div class="col d-flex justify-content-end pt-4">
+        <button [disabled]="!(myForm.valid && vsubmit)"   type="submit"  class="btn btn-primary btn-sm"  >
+          <i class="bi bi-search"></i> BUSCAR 
+        </button>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="w-75" *ngIf="ldocumentos.length >0">
+
+    <hr>
+    <table class="table">
+
+      <thead class="text-center">
+        <tr>
+
+          <th scope="col" style="width: 10%">
+            T DOC
+          </th>
+          <th scope="col" style="width: 10%">
+            DATOS
+          </th>
+          <th scope="col" style="width: 10%">
+            DOCUMENTO
+          </th>
+          <th scope="col" style="width: 10%">
+            ARCHIVO
+          </th>
+          
+          
+        </tr>
+      </thead>
+      <tbody class="text-center">
+
+
+        
+        <tr *ngFor="let item of ldocumentos " >
+
+
+          <td>
+            {{item.tipodoc }} - {{item.documento }}
+          </td>
+          <td>
+            {{item.razonsocial }}
+          </td>
+          <td>
+            {{item.documentoname }}
+            
+          </td>
+          
+          <td>
+            <i class="bi bi-files" 
+              (click)="openurl(item.barcofscan )" *ngIf="item.barcofscan !=null && item.barcofscan!=''">
+            </i>
+            
+            <!-- <svg class="bi"  width="18" height="18" (click)="openurl(item.documentofisico )"
+            *ngIf="item.documentofisico !=null && item.documentofisico!=''">
+              <use xlink:href="assets/bootstrap-icons.svg#file-earmark-text" />
+            </svg> -->
+          </td>
+         
+        </tr>
+
+      </tbody>
+    </table>
+
+  </div>
+</div>
+  
+<!-- <pre>Current page: {{page}} | Current page: {{totalpages}}</pre> -->
+  <div  class="d-flex justify-content-center mt-3" *ngIf="ldocumentos.length >0">
+ 
+
+  <ngb-pagination [collectionSize]="totalpages*2" [(page)]="page" aria-label="Default pagination"
+  (pageChange)="onPageChange(page)">
+  </ngb-pagination>
+  
+</div>
+</form>

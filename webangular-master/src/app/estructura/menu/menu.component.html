@@ -1,0 +1,72 @@
+<!--
+<div class="container-fluid ">
+    <div class="row">
+        <div class="col">
+            <img class="float-left" src="./assets/img/headCI.jpg" alt="">
+        </div>
+        <div class="col">
+
+            <div class="font-weight-bold float-right mr-4 mt-4">
+                <button type="button" class="btn text-white blue-grey lighten-2 btn-rounded float-right">
+                    ACCESO PLATAFORMA
+                    <i class="fa fa-user fa-2x " aria-hidden="true"></i>
+
+                </button>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <hr>
+
+</div>
+-->
+
+<nav class="navbar navbar-expand-lg navbar-dark unique-color">
+
+
+    <!-- Collapse button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+        aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto ">
+
+            <li class="nav-item " *ngFor="let p of menu">
+                <a class="btn text-white " routerLinkActive="of" style="background-color: #3f729b;font-size: 12px"    [routerLink]="p.value" [queryParams]="{id:p.id}" >
+
+                    {{p.display}}
+
+                </a>
+            </li>
+
+            <li >
+              <a class="btn text-white " style="background-color: #3f729b;font-size: 12px" (click)="salir()" >
+
+                 SALIR
+
+              </a>
+          </li>
+
+
+
+        </ul>
+        <a class="btn text-white " style="background-color: #3f729b;font-size: 12px">
+
+            MÓDULO {{muser.areDNombre}} <i class="fa fa-sticky-note fa-2x fa-pull-right" aria-hidden="true"></i>
+
+
+        </a>
+
+    </div>
+
+
+</nav>

@@ -1,0 +1,159 @@
+
+<div>
+
+
+
+
+
+  <div class="d-flex justify-content-center shadow-lg p-3 mb-5  rounded  text-white " style="background-color: #3f729b">
+    LISTADO DE SOLICITUDES DERIVADAS
+
+  </div>
+
+
+
+
+  <hr>
+  <table class="table table-sm">
+
+    <thead>
+
+      <tr>
+        <th scope="col" style="width: 7%">
+          <p class="font-weight-bolder"> Hoja Ruta </p>
+        </th>
+        <th scope="col" style="width: 8%">
+            <p class="font-weight-bolder"> Estado </p>
+        </th>
+        <th scope="col" style="width: 30%">
+          <p class="font-weight-bolder"> Nombre del Solicitante </p>
+        </th>
+        <th scope="col" style="width: 10%">
+          <p class="font-weight-bolder"> F. Registro </p>
+        </th>
+        <th scope="col" style="width: 10%">
+            <p class="font-weight-bolder"> F. Respuesta </p>
+        </th>
+        <th scope="col" style="width: 10%">
+              <p class="font-weight-bolder"> F. Entrega </p>
+        </th>
+        <th scope="col" style="width: 20%">
+          <p class="font-weight-bolder text-center"> Detalle </p>
+        </th>
+        <th scope="col" style="width: 20%">
+          <p class="font-weight-bolder"> Documentos </p>
+        </th>
+      </tr>
+
+    </thead>
+    <tbody>
+      <tr>
+      <tr *ngFor="let item of vsolicitudes ">
+        <td>{{item.solNHoja}} </td>
+        <td class="font-weight-bold" style="font-size: 12px" >
+            <ng-template [ngIf]="item.solCEcalificacion===1">
+                <a class="badge badge-primary">Transparencia</a>
+            </ng-template>
+            <ng-template [ngIf]="item.solCEcalificacion===2">
+                <a class="badge badge-danger">No Transparencia</a>
+            </ng-template>
+            <ng-template [ngIf]="item.solCEcalificacion!=2 && item.solCEcalificacion!=1">
+                <a class="badge badge-warning">  Sin Calificación</a>
+            </ng-template>
+        </td>
+        <td *ngIf="item.perCTipodoc==='DNI' || item.perCTipodoc==='LE' || item.perCTipodoc==='CE'" (click)="vDetalleSolicitud(item)">
+            {{item.perCTipodoc}} {{item.perNNrodoc}}  {{item.perDNombre}} {{item.perDApepat}} {{item.perDApemat}}</td>
+        <td *ngIf="item.perCTipodoc==='RUC'" (click)="vDetalleSolicitud(item)">
+            {{item.perCTipodoc}} {{item.perNNrodoc}}  {{item.perDRazonSocial}} </td>
+
+
+        <td> {{item.solFRegistro}} </td>
+        <td> {{item.solFRespuesta}} </td>
+        <td> {{item.solFEntrega}} </td>
+
+        <td>
+
+          <div *ngIf="item.nroArchivos===0 && (item.solESolicitud==1 || item.solESolicitud==10 )"
+            class="alert alert-warning d-flex  text-center justify-content-center font-weight-bold" role="alert">
+
+            ESCANEAR Y ADJUNTAR SOLICUTD
+          </div>
+
+
+
+          <div *ngIf="(item.solESolicitud==1 || item.solESolicitud==10 )  && item.nroArchivos>0"
+            class="alert alert-danger d-flex justify-content-center font-weight-bold" role="alert">
+            SIN DERIVAR A ENLACE
+          </div>
+
+
+          <div *ngIf="item.solESolicitud==2" class="alert alert-info d-flex justify-content-center font-weight-bold"
+            role="alert">
+            DERIVADO A ENLACE
+          </div>
+
+
+          <div *ngIf="item.solESolicitud==3" class="alert alert-info d-flex justify-content-center font-weight-bold"
+            role="alert">
+            CALIFICADO COMO TRANSPARENCIA
+          </div>
+
+
+
+          <div *ngIf="item.solESolicitud==4" class="alert alert-warning d-flex justify-content-center font-weight-bold"
+            role="alert">
+            ACUSE GENERADO
+          </div>
+
+          <div *ngIf="item.solESolicitud==5" class="alert alert-warning d-flex justify-content-center font-weight-bold"
+          role="alert">
+            ENVIADO A MENSAJERIA
+          </div>
+
+
+            <div *ngIf="item.solESolicitud==6" class="alert alert-warning d-flex  justify-content-center font-weight-bold"
+              role="alert">
+            ENVIADO A MESA DE PARTES
+            </div>
+
+
+          <div *ngIf="item.solESolicitud==7" class="alert alert-warning d-flex justify-content-center font-weight-bold"
+          role="alert">
+            NO CALIFICA COMO TRANSPARENCIA
+          </div>
+
+          <div *ngIf="item.solESolicitud==8" class="alert alert-success d-flex justify-content-center font-weight-bold"
+            role="alert">
+            ATENDIDO MESA DE PARTES
+          </div>
+
+          <div *ngIf="item.solESolicitud==9" class="alert alert-success d-flex justify-content-center font-weight-bold"
+            role="alert">
+            ATENDIDO MENSAJERIA
+          </div>
+
+
+
+
+
+
+
+
+        </td>
+        <td class="text-center ">
+
+          <i *ngIf="item.nroArchivos>0 " class="fa fa-file-text-o fa-2x" (click)="elistararchivo(item)"
+            aria-hidden="true"></i>
+        </td>
+
+      </tr>
+
+    </tbody>
+  </table>
+
+
+
+
+
+
+</div>

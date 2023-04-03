@@ -1,0 +1,28 @@
+<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Entregar Acuse</h5>
+      
+      <p class="card-text">Paso 1 ) Escanear el Acuse con la firma de recepcion</p>
+      <p class="card-text">Paso 2) Adjuntar Archivo a la solicitud</p>
+      <p class="card-text">Paso 3) Culminar Solicitud </p>
+    </div>
+  </div>
+
+<div *ngIf="datossolicitud.length>0">
+
+    <app-ptablelista (myEmit)="onItemChange( $event )" [items]="datossolicitud "></app-ptablelista>
+
+    <div class="d-flex justify-content-center">
+
+        
+        
+
+        <label class="btn btn-primary">
+            ADJUNTAR ACUSE   <i class="fa fa-upload" aria-hidden="true"></i> <input type="file" hidden>
+        </label>
+
+        
+        <button type="submit" class="btn btn-primary"  >CULMINADO  <i class="fa fa-archive" aria-hidden="true"></i></button>
+  
+    </div> 
+  </div>

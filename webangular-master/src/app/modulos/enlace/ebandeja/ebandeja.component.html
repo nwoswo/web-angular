@@ -1,0 +1,39 @@
+<div class="col-12 mx-auto W-100 mb-5">
+
+
+
+  <div *ngIf="ltsocSolicitud.length>0">
+
+    <app-etablelista (myEmit)="onItemChange( $event )" [items]="ltsocSolicitud " #etablelista></app-etablelista>
+
+    <div class="d-flex justify-content-center">
+
+      <button type="button" class="btn btn-primary btn-sm" (click)="editar()" > VERIFICA INFORMACIÓN  <i class="fa fa-pencil" aria-hidden="true"></i></button>
+      <button type="button" class="btn btn-primary btn-sm" (click)="atenderSolcitud()" >CALIFICAR TRANSPARENCIA<i class="fa fa-cog" aria-hidden="true"></i></button>
+      <button type="button" class="btn btn-primary btn-sm" (click)="requerirInformacion()" >REQUERIMIENTO INFORMACIÓN  <i class="fa fa-plus" aria-hidden="true"></i></button>
+      <button type="button" class="btn btn-primary btn-sm" (click)="generaAcuse()" >ELABORAR RESPUESTA<i class="fa fa-cog" aria-hidden="true"></i></button>
+      <button type="button" class="btn btn-primary btn-sm" (click)="uploadAll('OFICIO')" >ADJUNTAR OFICIO   <i class="fa fa-paperclip" aria-hidden="true"></i></button>
+      <button type="button" class="btn btn-primary btn-sm" (click)="archivarSolicitud()" > DERIVAR  <i class="fa fa-archive" aria-hidden="true"></i> </button>
+
+   </div>
+</div>
+</div>
+<!--
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title"></h4>
+
+  </div>
+  <div class="modal-body text-center" style="font-size: 18px">
+
+   <p>Esta Seguro a  ?</p>
+  <button type="button" class="btn btn-primary" (click)="mesaPartes()" >Mesa de Partes (Lima)</button>
+  <button type="button" class="btn btn-default  text-white" (click)="mensajeria()" >Mensajeria</button>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light sm-btn" (click)="modal.close()">Cerrar</button>
+  </div>
+</ng-template>
+-->

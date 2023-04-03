@@ -1,0 +1,11 @@
+.text{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-height: 16px;
+  max-height: 32px;
+
+  /* The number of lines to be displayed */
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}

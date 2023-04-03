@@ -1,0 +1,164 @@
+
+<div id="collapseExample" [ngbCollapse]="isCollapsed">
+  <div class="card">
+      <div class="card-body">
+
+      <div class="d-flex justify-content-start">
+          <p>
+          <span class="badge badge-primary" style="font-size: 14px">Pregunta : </span>
+          </p>
+          <p><br>
+            {{rinDEtalle}}
+          </p>
+       </div>
+<hr>
+
+      <div class="d-flex justify-content-end mb-3">
+
+
+      <span  class=" badge badge-success ">
+        RESPUESTA :
+      </span>
+    </div>
+      <div >
+        <form [formGroup]="addNewPostForm"  (ngSubmit)="regRespuesta()" >
+
+          <div class="form-group">
+            <textarea class="form-control text-uppercase" formControlName="respuesta"  rows="8"
+            [ngClass]="{ 'is-invalid':  addNewPostForm.controls.respuesta.errors }" >
+            </textarea>
+            <div *ngIf=" addNewPostForm.controls.respuesta.errors" class="text-danger">
+                <div *ngIf="addNewPostForm.controls.respuesta.errors.required">Respuesta minina 30 caracteres</div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-dismiss="modal" (click)="this.isCollapsed = !this.isCollapsed;">Cerrar</button>
+
+
+            <button type="submit"  class="btn btn-primary" [disabled]="!addNewPostForm.valid" >
+              REGISTRAR
+            </button>
+
+
+        </div>
+
+        </form>
+      </div>
+
+
+
+
+    </div>
+  </div>
+</div>
+
+<div>
+
+  <table class="table table-sm">
+
+      <thead>
+          <tr  style="font-size: 10px;">
+
+              <th scope="col" style="width: 10%">
+                  <p class="font-weight-bolder"> # Hoja </p>
+              </th>
+              <th scope="col" style="width: 10%">
+                  <p class="font-weight-bolder"> Responsable </p>
+              </th>
+
+              <th scope="col" style="width: 10%" >
+                  <p class="font-weight-bolder"> F. Recibido   </p>
+              </th>
+
+              <th scope="col" style="width: 40%;">
+                <p class="font-weight-bolder"> Detalle Requerimiento  </p>
+            </th>
+
+            <th scope="col" style="width: 10%;text-align: center">
+              <p class="font-weight-bolder"> Estado  </p>
+            </th>
+
+
+            <th scope="col" style="width: 10%;text-align: center">
+                <p class="font-weight-bolder"> Archivos  </p>
+            </th>
+
+
+
+
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+
+          <tr *ngFor="let item of items " style="font-size: 10px">
+
+
+
+              <td><input type="radio" name="id_lista"  (change)="inItemChange(item)"  class="text-danger" />
+                {{item.solNHoja}}  </td>
+              <td >
+                  <span class="badge badge-light"> {{item.areaDarea}} </span>
+              </td>
+              <td class="text-danger font-weight-bold">   {{item.rinFRequerimiento}} </td>
+              <td >
+
+
+                {{ (item.rinDEtalle.length>45)? (item.rinDEtalle | slice:0:45)+'..........':(item.rinDEtalle) }}<a  style="color:blue;font-weight:bold;"  (click)="open(content,item.rinDEtalle)">Ver mas</a>
+
+
+              </td>
+              <td   class="text-center align-middle">
+                  <span  *ngIf="item.rinEstado==1" class="badge badge-danger">
+                      SIN RESPUESTA
+                    </span>
+                    <span  *ngIf="item.rinEstado==2" class="badge badge-warning">
+                     CON RESPUESTA
+                    </span>
+                    <span  *ngIf="item.rinEstado==3" class="badge badge-primary">
+                     ATENDIDO
+                  </span>
+              </td>
+
+
+              <td class="text-center" >
+                  <i *ngIf="item.nroArchivos>0 " class="fa fa-file-text-o fa-2x"   (click)="elistararchivo(item)" aria-hidden="true"></i>
+              </td>
+
+          </tr>
+
+      </tbody>
+  </table>
+
+  <div class="d-flex justify-content-center">
+
+
+
+      <button type="button" class="btn btn-primary" (click)="colap()" >      RESPONDER   <i class="fa fa-pencil" aria-hidden="true"></i></button>
+      <button type="button" class="btn btn-primary" (click)="uploadAll('INFORME')" >      ADJUNTAR ARCHIVO (OPCIONAL)   <i class="fa fa-paperclip" aria-hidden="true"></i></button>
+      <button type="button" class="btn btn-primary" (click)="atendido()">DERIVAR <i class="fa fa-cog" aria-hidden="true"></i></button>
+
+
+
+
+   </div>
+
+
+
+</div>
+
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Detalle del Requerimiento</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+            {{contenido}}
+  </div>
+
+</ng-template>

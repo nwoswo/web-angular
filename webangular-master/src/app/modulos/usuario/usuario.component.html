@@ -1,0 +1,100 @@
+
+
+
+
+<div class="col-10 mx-auto mb-5 ">
+<div class="d-flex justify-content-between">
+    <button type="button" class="btn btn-primary" (click)="newUsuario()" tit >
+        Nuevo Usuario
+
+    </button>
+
+    <div class="form-group form-inline">
+        Buscar: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="shortservice.searchTerm" />
+        <span class="ml-3" *ngIf="shortservice.loading$ | async">Buscando...</span>
+    </div>
+
+</div>
+<hr>
+    <table class="table table-hover">
+
+        <thead>
+            <tr>
+                <th scope="col" style="width: 10%" sortable="shorttraDNombre" (sort)="onSort($event)">
+                    <p class="font-weight-bolder"> AREA</p>
+
+                </th>
+                <th scope="col" style="width: 20%" >
+                    <p class="font-weight-bolder"> USUARIO</p>
+                </th>
+
+                <th style="width: 10%">
+                    <p class="font-weight-bolder"> DNI </p>
+                </th>
+                <th style="width: 40%">
+                    <p class="font-weight-bolder">NOMBRE</p>
+                </th>
+                <th style="width:  20%" colspan="2">
+                    <p class="font-weight-bolder"> OPCIONES</p>
+                </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+
+            <tr *ngFor="let p of usuarhoshort$ | async ">
+
+                <td>
+                    <ngb-highlight [result]="p.shorttraDNombre"></ngb-highlight>
+                </td>
+
+                <td>
+                    <ngb-highlight [result]="p.usuDUsuario" [term]="service.searchTerm"></ngb-highlight>
+                </td>
+
+                <td>
+                    <ngb-highlight [result]="p.gpecPersona.traNNrodoc" [term]="service.searchTerm"></ngb-highlight>
+                </td>
+
+                <td>
+                    <ngb-highlight [result]="p.gpecPersona.traDNombres" [term]="service.searchTerm"></ngb-highlight>
+                    {{p.gpecPersona.traDApepat}} {{p.gpecPersona.traDApemat}}
+                </td>
+
+                <td>
+                  <span class="btn btn-primary btn-xs" title="Editar" (click)="editar(p)"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                  <span class="btn btn-warning btn-xs" title="Cambiar Password" (click)="updatePassword(p)"><i class="fa fa-cog" aria-hidden="true"></i></span>
+
+
+
+                  <span *ngIf="p.usuEUsuario==1 "  title="Desactivar"  class="btn btn-success btn-xs" (click)="confirmar(p)" >
+                        <i class="fa fa-toggle-off" aria-hidden="true" ></i>
+                  </span>
+
+                  <span *ngIf="p.usuEUsuario==0 " title="Activar" class="btn btn-danger btn-xs" (click)="confirmar(p)">
+                    <i class="fa fa-toggle-on" aria-hidden="true"></i>
+                  </span>
+                </td>
+
+
+            </tr>
+
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-between p-2 pagination pg-blue">
+        <ngb-pagination [collectionSize]="totaleshort$ | async" [(page)]="shortservice.page"
+            [pageSize]="shortservice.pageSize">
+        </ngb-pagination>
+
+        <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="shortservice.pageSize">
+            <option [ngValue]="2">2 items per page</option>
+            <option [ngValue]="4">4 items per page</option>
+            <option [ngValue]="6">6 items per page</option>
+            <option [ngValue]="20">20 items per page</option>
+        </select>
+    </div>
+
+
+</div>

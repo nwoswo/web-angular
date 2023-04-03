@@ -1,0 +1,26 @@
+<div class="col-12 mx-auto W-100 ">
+  <div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-primary" (click)="newUsuario()">
+      Registrar Solicitud
+
+    </button>
+
+
+  </div>
+
+  <div *ngIf="vsolicitudes.length>0">
+
+    <app-ptablelista (myEmit)="onItemChange( $event )" [items]="vsolicitudes " #ptablelista></app-ptablelista>
+
+  <div class="d-flex justify-content-center">
+
+      <button type="submit" class="btn btn-primary" (click)="editar()" >EDITAR   <i class="fa fa-pencil" aria-hidden="true" ></i></button>
+      <button type="submit" class="btn btn-primary"  (click)="borrar() ">BORRAR  <i class="fa fa-trash" ></i></button>
+      <button type="submit" class="btn btn-primary"  (click)="uploadAll('SOLICITUD TRANSPARENCIA') ">ADJUNTAR SOLICITUD  <i class="fa fa-paperclip" ></i></button>
+      <button type="submit" class="btn btn-primary"  (click)="derivar() ">DERIVAR  <i class="fa fa-external-link-square" aria-hidden="true"></i></button>
+
+  </div>
+</div>
+
+
+</div>

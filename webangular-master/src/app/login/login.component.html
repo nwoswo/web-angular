@@ -1,0 +1,91 @@
+
+
+
+<div class="d-flex justify-content-end">
+
+<a class="btn text-white " routerLinkActive="of" style="background-color: #3f729b;font-size: 12px"    href="#/consulta"  >
+
+Consulta Transparencia
+
+</a>
+
+</div>
+
+<hr>
+
+<div class="d-flex vh-100">
+  <div class="d-flex w-100 justify-content-center align-self-center">
+    <div class="card p-4" style="width: 30rem;">
+      <div class="container ">
+
+
+        <form class="form-horizontal" [formGroup]="addNewPostForm"  (ngSubmit)="onSubmit()" novalidate>
+
+
+
+          <img class="card-img-top rounded mx-auto d-block" src="./assets/img/banner_logIn.png"
+            style="width: 243px; height: 120px;">
+          <hr>
+          <p class="h5 mb-4 text-center">MÓDULO TRANSPARENCIA - FONAVI</p>
+
+          <!-- Email -->
+
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Usuario</label>
+            <div class="col-6">
+              <input type="text" class="form-control text-uppercase" formControlName="email"  autocomplete="off" >
+            </div>
+          </div>
+
+          <div class="form-group row ">
+            <label class="col-sm-4 col-form-label">Contraseña</label>
+            <div class="col-sm-6">
+              <input type="password" class="form-control" formControlName="password"  autocomplete="off" >
+            </div>
+          </div>
+
+          <div class="form-group row ">
+              <label class="col-sm-4 col-form-label">Tipo Usuario</label>
+              <div class="col-sm-6">
+                  <select class="form-control" name="area"  formControlName="farea"
+                  >
+                  <option *ngFor="let role of roles" [value]="role.areCArea" >
+                   {{role.areDNombre}}
+                  </option>
+              </select>
+                </div>
+
+
+          </div>
+
+          <!-- Sign in button -->
+
+
+            <button type="submit"  [disabled]="!addNewPostForm.valid"  class="btn btn-primary btn-block text-white">INGRESAR</button>
+            <div class="d-flex justify-content-center text-danger" >{{lmessage}}</div>
+          <hr>
+
+          <img class="card-img-top rounded mx-auto d-block" src="./assets/img/chrome.fw.png"
+            style="width: 53px; height: 48px;" alt="Card image cap">
+          <!-- Register -->
+
+          <div class="text-center">
+            <p>Secretaría Técnica FONAVI ®Todos los derechos reservados v
+             1.0.0</p>
+            <br>
+          </div>
+
+        </form>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->

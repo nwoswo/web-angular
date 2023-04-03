@@ -1,0 +1,242 @@
+<div>
+
+
+
+  <form class="form-horizontal" id="add-form"  (ngSubmit)="onSubmit()" [formGroup]="myForm" novalidate>
+
+
+
+
+
+    <div class="modal-body">
+
+
+
+
+
+      <div class="mb-3" >
+        <button type="button" class="btn text-white"   style="background-color: #3f729b;font-size: 12px" > II DATOS DEL SOLICITANTE</button>
+
+
+      </div>
+
+
+
+      <div class="form-row" style="font-size: 12px;">
+
+        <div class="col-md-auto">
+          <label>Tip. Doc</label>
+          <select class="form-control form-control-sm" name="traCArea" formControlName="perCTipodoc"  (change)="selectTdoc($event.target.value)"
+          [ngClass]="{ 'is-invalid':  myForm.controls.perCTipodoc.errors }"  >
+
+            <option value=""></option>
+            <option  *ngFor="let item of tipoDoc" [value]="item">{{item}}</option>
+          </select>
+        </div>
+
+        <div class="col-md-2 ">
+          <label>Número Doc</label>
+          <input type="text" class="form-control form-control-sm " formControlName="perNNrodoc" maxlength="12" #termino
+          [ngClass]="{ 'is-invalid':  myForm.controls.perNNrodoc.errors }" (keyup)="buscar(termino.value)" />
+
+          <div *ngIf="myForm.controls.perNNrodoc.errors"  class="invalid-feedback" >
+            Solo Números
+          </div>
+
+        </div>
+
+        <div class="col ">
+          <label>Razón Social</label>
+          <input type="text" class="form-control form-control-sm text-uppercase" formControlName="perDRazonSocial"
+          [ngClass]="{ 'is-invalid':  myForm.controls.perDRazonSocial.errors }" />
+
+        </div>
+
+        <div class="col-md-4 ">
+          <label> <i class="fa fa-envelope-o fa-lg" aria-hidden="true"></i>  e-mail </label>
+
+
+
+
+          <input type="text" class="form-control form-control-sm text-lowercase" formControlName="perDEmail" maxlength="60"
+          [ngClass]="{ 'is-invalid':  myForm.controls.perDEmail.errors }" />
+
+
+
+          <div *ngIf="myForm.controls.perDEmail.errors"  class="invalid-feedback" >
+           Correo no valido
+          </div>
+
+
+
+
+        </div>
+
+
+      </div>
+
+      <div class="form-row mt-2" style="font-size: 12px;">
+        <div class="col mb-3">
+          <label>Apellido Paterno</label>
+          <input type="text" class="form-control form-control-sm text-uppercase"  formControlName="perDApepat" maxlength="15"
+          [ngClass]="{ 'is-invalid':  myForm.controls.perDApepat.errors }" />
+
+        </div>
+
+        <div class="col mb-3">
+          <label>Apellido Materno</label>
+          <input type="text" class="form-control form-control-sm text-uppercase" formControlName="perDApemat" maxlength="15"
+          [ngClass]="{ 'is-invalid':  myForm.controls.perDApemat.errors }" />
+
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+          <label>Nombre </label>
+          <input type="text" class="form-control form-control-sm text-uppercase" formControlName="perDNombre"
+          [ngClass]="{ 'is-invalid':  myForm.controls.perDNombre.errors }" />
+
+
+        </div>
+        <div class="col-md-2 ">
+          <label> <i class="fa fa-mobile fa-lg" aria-hidden="true"></i> Nro Celular</label>
+          <input type="text" class="form-control form-control-sm" formControlName="perNCelular"
+          [ngClass]="{ 'is-invalid':  myForm.controls.perNCelular.errors }" />
+
+
+
+        </div>
+
+        <div class="col-md-2 ">
+          <label> <i class="fa fa-phone fa-lg" aria-hidden="true"></i> Teléfono Fijo</label>
+          <input type="text" class="form-control form-control-sm" formControlName="perNTelefono" />
+
+
+        </div>
+
+      </div>
+
+      <div class="form-row mt-2" style="font-size: 12px;">
+        <div class="col-md-3 ">
+          <label>Departamento</label>
+          <select class="form-control form-control-sm" style="font-size: 11px;" formControlName="codDpto"   (change)="selectProvincia($event.target.value)"
+          [ngClass]="{ 'is-invalid':  myForm.controls.codDpto.errors }"  >
+
+            <option  *ngFor="let item of departamento" [value]="item.cod"  >{{item.value}}</option>
+
+          </select>
+        </div>
+
+        <div class="col-md-3 ">
+          <label>Provincia</label>
+          <select class="form-control form-control-sm" style="font-size: 11px;" formControlName="codProv" (change)="selectDistrito($event.target.value)"
+          [ngClass]="{ 'is-invalid':  myForm.controls.codProv.errors }" >
+            <option value=""></option>
+
+            <option  *ngFor="let item of departamentoSelect" [value]="item.cod"  >{{item.value}}</option>
+
+          </select>
+        </div>
+
+        <div class="col-md-3 ">
+          <label>Distrito</label>
+          <select class="form-control form-control-sm"  style="font-size: 11px;" formControlName="perNUbigeo"
+          [ngClass]="{ 'is-invalid':  myForm.controls.perNUbigeo.errors }"  >
+            <option value=""></option>
+            <option  *ngFor="let item of distritoSelect" [value]="item.cod"  >{{item.value}}</option>
+          </select>
+        </div>
+        <div class="col-md-3 ">
+          <label>Urbanización </label>
+          <input type="text" class="form-control form-control-sm text-uppercase" formControlName="perDUrbanizacion"   />
+
+
+        </div>
+
+      </div>
+
+      <div class="form-row mt-2" style="font-size: 12px;">
+
+        <div class="col-md-4 mb-3">
+          <label>Av/Calle/JR/PSJ </label>
+          <input type="text" class="form-control form-control-sm text-uppercase" formControlName="perDCalleave"
+          [ngClass]="{ 'is-invalid':  myForm.controls.perDCalleave.errors }" />
+
+
+
+        </div>
+        <div class="col-md-2 mb-3">
+          <label>N°/DPTO. / INT </label>
+          <input type="text" class="form-control form-control-sm text-uppercase" formControlName="perDInterior"
+          [ngClass]="{ 'is-invalid':  myForm.controls.perDInterior.errors }" />
+
+
+
+        </div>
+
+        <div class="col-md-6 ">
+          <label> Referencia </label>
+          <input type="text" class="form-control form-control-sm text-uppercase" formControlName="perDReferencia" maxlength="60" />
+        </div>
+
+
+      </div>
+
+
+
+
+
+
+
+
+      <div class="form-row mb-2"  *ngIf="varea ===3 ||  varea ===4" >
+          <div class="col-md-2 mb-3">
+            <label class="form-check-label font-weight-bold" >Recojo en :</label>
+          </div>
+          <div class="col-md-3  custom-control custom-radio">
+              <input type="radio" class="custom-control-input" id="1" value=1  formControlName="solERecojo"  required>
+              <label class="custom-control-label" for="1" [ngClass]="{ 'text-danger':  myForm.controls.solERecojo.errors }">Mesa de Partes</label>
+          </div>
+          <div class="col-md-2 custom-control custom-radio">
+              <input type="radio" class="custom-control-input" id="0" value=0 formControlName="solERecojo" required>
+              <label class="custom-control-label " for="0"  [ngClass]="{ 'text-danger':  myForm.controls.solERecojo.errors }">
+                  Mensajeria
+              </label>
+          </div>
+      </div>
+
+
+
+      <div class="mb-3">
+        <button type="button" class="btn text-white"   style="background-color: #3f729b;font-size: 12px">
+          III INFORMACIÓN CONCRETA Y PRECISA DEL PEDIDO
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+        </button>
+
+
+      </div>
+
+      <div class="row">
+
+        <div class="col">
+          <textarea class="form-control text-uppercase"  rows="7" formControlName="solDInformacion"
+          [ngClass]="{ 'is-invalid':  myForm.controls.solDInformacion.errors }" ></textarea>
+
+        </div>
+
+
+
+      </div>
+
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" data-dismiss="modal" (click)="activeModal.dismiss()"> CERRAR</button>
+      <button type="submit" class="btn btn-primary"  [disabled]="!myForm.valid" >ACEPTAR</button>
+
+
+    </div>
+  </form>
+
+
+</div>

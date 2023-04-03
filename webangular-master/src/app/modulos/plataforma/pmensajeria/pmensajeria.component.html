@@ -1,0 +1,200 @@
+
+<div>
+
+
+
+  <pre>MENSAJERIA </pre>
+
+  <div class="d-flex justify-content-end">
+
+      <form class="form-inline"  id="add-form" [formGroup]="f"  (ngSubmit)="buscar()" novalidate>
+
+          <div class="font-weight-bold" >
+            <label  ># Hoja de Ruta</label>
+          </div>
+
+          <div class="px-4" >
+
+            <input type="text" class="form-control"  formControlName="textbuscar"  [ngClass]="{ 'is-invalid':  f.controls.textbuscar.errors }" />
+
+            <div *ngIf="f.controls.textbuscar.errors" class="invalid-feedback">
+              <div *ngIf="f.controls.textbuscar.errors.minlength">Minimo 8 Caracteres Ejem: 2018-001</div>
+          </div>
+
+          </div>
+
+          <button type="submit"  [disabled]="!f.valid" class="btn btn-primary ">Buscar</button>
+
+        </form>
+
+  </div>
+
+
+  <div *ngIf="vsolicitudes.length>0 " >
+
+
+
+
+    <hr>
+  <table class="table table-sm">
+
+    <thead>
+      <tr>
+
+        <th scope="col" style="width: 10%">
+          <p class="font-weight-bolder"> # Hoja Ruta </p>
+        </th>
+        <th scope="col" style="width: 10%">
+            <p class="font-weight-bolder"> Documento </p>
+          </th>
+        <th scope="col" style="width: 30%">
+          <p class="font-weight-bolder"> Nombre del Solicitante </p>
+        </th>
+        <th scope="col" style="width: 15%">
+          <p class="font-weight-bolder"> Nro Celular </p>
+        </th>
+        <th scope="col" style="width: 15%">
+          <p class="font-weight-bolder"> Fecha Registro </p>
+        </th>
+        <th scope="col" style="width: 20%">
+          <p class="font-weight-bolder"> Estado de la Solicitud </p>
+        </th>
+        <th scope="col" style="width: 20%">
+          <p class="font-weight-bolder"> Archivos </p>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+
+      <tr *ngFor="let item of vsolicitudes ">
+
+        <td>
+          <input type="radio" name="id_lista" value="item" (change)="inItemChange(item)" />
+
+          {{item.solNHoja}}
+      </td>
+
+      <td  (click)=" vDetalleSolicitud(item)">
+        {{item.perCTipodoc}} {{item.perNNrodoc}}
+    </td>
+
+    <td *ngIf="item.perCTipodoc==='DNI' || item.perCTipodoc==='LE' || item.perCTipodoc==='CE'" (click)=" vDetalleSolicitud(item)">
+      {{item.perDNombre}} {{item.perDApepat}} {{item.perDApemat}}
+    </td>
+    <td *ngIf="item.perCTipodoc==='RUC'" (click)=" vDetalleSolicitud(item)">
+      {{item.perDRazonSocial}} </td>
+
+        <td> {{item.perNCelular}} </td>
+        <td> {{item.solFRegistro}} </td>
+
+        <td>
+
+          <div *ngIf="item.nroArchivos===0 && (item.solESolicitud==1 || item.solESolicitud==10 )"
+            class="alert alert-warning d-flex  text-center justify-content-center font-weight-bold" role="alert">
+
+            ESCANEAR Y ADJUNTAR SOLICUTD
+          </div>
+
+
+
+          <div *ngIf="(item.solESolicitud==1 || item.solESolicitud==10 )  && item.nroArchivos>0"
+            class="alert alert-danger d-flex justify-content-center font-weight-bold" role="alert">
+            SIN DERIVAR A ENLACE
+          </div>
+
+
+          <div *ngIf="item.solESolicitud==2" class="alert alert-info d-flex justify-content-center font-weight-bold"
+            role="alert">
+            DERIVADO A ENLACE
+          </div>
+
+
+          <div *ngIf="item.solESolicitud==3" class="alert alert-warning d-flex justify-content-center font-weight-bold"
+            role="alert">
+            DERIVADO A ENLACE
+          </div>
+
+
+
+          <div *ngIf="item.solESolicitud==4" class="alert alert-warning d-flex justify-content-center font-weight-bold"
+            role="alert">
+            DERIVADO A ENLACE
+          </div>
+
+          <div *ngIf="item.solESolicitud==5" >
+
+          <div *ngIf="item.nroacusescan==0"
+              class="alert alert-success d-flex  justify-content-center font-weight-bold" role="alert">
+              ACUSE GENERADO
+            </div>
+            <div *ngIf="item.nroacusescan>0" class="alert alert-warning d-flex  justify-content-center font-weight-bold"
+              role="alert">
+              ACUSE SCANEADO
+            </div>
+
+
+
+          </div>
+
+          <div *ngIf="item.solESolicitud==6">
+            <div *ngIf="item.nroacusescan==0"
+              class="alert alert-success d-flex  justify-content-center font-weight-bold" role="alert">
+              ACUSE GENERADO
+            </div>
+            <div *ngIf="item.nroacusescan>0" class="alert alert-warning d-flex  justify-content-center font-weight-bold"
+              role="alert">
+              ACUSE SCANEADO
+            </div>
+          </div>
+
+          <div *ngIf="item.solESolicitud==7" class="alert alert-warning d-flex justify-content-center font-weight-bold"
+          role="alert">
+            NO CALIFICA COMO TRANSPARENCIA
+          </div>
+
+          <div *ngIf="item.solESolicitud==8" class="alert alert-success d-flex justify-content-center font-weight-bold"
+            role="alert">
+            ATENDIDO MESA DE PARTES
+          </div>
+
+          <div *ngIf="item.solESolicitud==9" class="alert alert-success d-flex justify-content-center font-weight-bold"
+            role="alert">
+            ATENDIDO MENSAJERIA
+          </div>
+
+
+
+
+
+
+
+
+        </td>
+        <td class="text-center ">
+
+          <i *ngIf="item.nroArchivos>0 " class="fa fa-file-text-o fa-2x" (click)="elistararchivo(item)"
+            aria-hidden="true"></i>
+        </td>
+
+      </tr>
+
+    </tbody>
+  </table>
+
+
+
+    <div class="d-flex justify-content-center">
+
+      <button type="submit" class="btn btn-primary" (click)="elistararchivo()" >DESCARGAR ACUSE   <i class="fa fa-download" aria-hidden="true"></i></button>
+      <button type="submit" class="btn btn-primary" (click)="uploadAll('Acuse firmado')" >ESCANEAR ACUSE FIRMADO   <i class="fa fa-paperclip" ></i></button>
+
+      <button type="submit" class="btn btn-primary" (click)="derivar()" >MARCAR COMO ATENDIDO  <i class="fa fa-check-circle-o" aria-hidden="true"></i></button>
+
+    </div>
+
+  </div>
+
+
+
+</div>

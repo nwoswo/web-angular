@@ -1,0 +1,181 @@
+<div>
+
+
+
+  <form class="form-horizontal" id="add-form" [formGroup]="myForm" novalidate>
+
+
+
+
+
+    <div class="modal-body">
+
+
+
+
+
+      <div class="mb-3" >
+        <button type="button" class="btn text-white"   style="background-color: #3f729b;font-size: 12px" > II DATOS DEL SOLICITANTE</button>
+
+
+      </div>
+
+
+
+      <div class="form-row" style="font-size: 12px;">
+
+        <div class="col-md-auto">
+          <label>Tip. Doc</label>
+          <input type="text" class="form-control form-control-sm " formControlName="perCTipodoc" maxlength="20"  />
+
+        </div>
+
+        <div class="col-md-2 ">
+          <label>Número Doc</label>
+          <input type="text" class="form-control form-control-sm " formControlName="perNNrodoc" maxlength="20"  />
+
+
+        </div>
+
+        <div class="col ">
+          <label>Razón Social</label>
+          <input type="text" class="form-control form-control-sm text-uppercase" formControlName="perDRazonSocial" />
+
+        </div>
+        <div class="col-md-4 ">
+          <label> <i class="fa fa-envelope-o fa-lg" aria-hidden="true"></i>  e-mail </label>
+          <input type="text" class="form-control form-control-sm" formControlName="perDEmail" maxlength="60" />
+        </div>
+
+      </div>
+
+      <div class="form-row mt-2" style="font-size: 12px;">
+        <div class="col mb-3">
+          <label>Apellido Paterno</label>
+          <input type="text" class="form-control form-control-sm text-uppercase"  formControlName="perDApepat"  />
+
+        </div>
+
+        <div class="col mb-3">
+          <label>Apellido Materno</label>
+          <input type="text" class="form-control form-control-sm text-uppercase" formControlName="perDApemat"  />
+
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+          <label>Nombre </label>
+          <input type="text" class="form-control form-control-sm text-uppercase" formControlName="perDNombre" />
+
+
+        </div>
+        <div class="col-md-2 mb-3">
+          <label> <i class="fa fa-mobile fa-lg" aria-hidden="true"></i> Nro Celular</label>
+          <input type="text" class="form-control form-control-sm" formControlName="perNCelular" />
+
+
+        </div>
+
+        <div class="col-md-2 mb-3">
+          <label> <i class="fa fa-phone fa-lg" aria-hidden="true"></i> Teléfono Fijo</label>
+          <input type="text" class="form-control form-control-sm" formControlName="perNTelefono" />
+
+
+        </div>
+      </div>
+
+      <div class="form-row mt-2" style="font-size: 12px;">
+        <div class="col-md-3 ">
+          <label>Departamento</label>
+          <input type="text" class="form-control form-control-sm text-uppercase" formControlName="dedDDepart"   />
+        </div>
+
+        <div class="col-md-3 ">
+          <label>Provincia</label>
+          <input type="text" class="form-control form-control-sm text-uppercase" formControlName="prdDProvi"   />
+        </div>
+
+        <div class="col-md-3 ">
+          <label>Distrito</label>
+          <input type="text" class="form-control form-control-sm text-uppercase" formControlName="didDDistrito"   />
+        </div>
+
+
+        <div class="col-md-3 ">
+          <label>Urbanización </label>
+          <input type="text" class="form-control form-control-sm text-uppercase" formControlName="perDUrbanizacion"   />
+        </div>
+
+      </div>
+
+      <div class="form-row mt-2" style="font-size: 12px;">
+
+        <div class="col-md-4 mb-3">
+          <label>Av/Calle/JR/PSJ </label>
+          <input type="text" class="form-control form-control-sm text-uppercase" formControlName="perDCalleave" />
+
+
+        </div>
+        <div class="col-md-2 mb-3">
+          <label>N°/DPTO. / INT </label>
+          <input type="text" class="form-control form-control-sm text-uppercase" formControlName="perDInterior"  />
+
+
+        </div>
+        <div class="col-md-6 ">
+          <label> Referencia </label>
+          <input type="text" class="form-control form-control-sm text-uppercase" formControlName="perDReferencia" maxlength="60" />
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div class="form-row mb-2">
+          <div class="col-md-2 mb-3">
+            <label class="form-check-label font-weight-bold" >Recojo en :</label>
+          </div>
+          <div class="col-md-3  custom-control custom-radio">
+              <input type="radio" class="custom-control-input" id="1" value=1  formControlName="solERecojo"  required>
+              <label class="custom-control-label" for="1" [ngClass]="{ 'text-danger':  myForm.controls.solERecojo.errors }">Mesa de Partes</label>
+          </div>
+          <div class="col-md-2 custom-control custom-radio">
+              <input type="radio" class="custom-control-input" id="0" value=0 formControlName="solERecojo" required>
+              <label class="custom-control-label " for="0"  [ngClass]="{ 'text-danger':  myForm.controls.solERecojo.errors }">
+                  Mensajeria
+              </label>
+          </div>
+      </div>
+
+
+
+      <div class="mb-3">
+        <button type="button" class="btn text-white"   style="background-color: #3f729b;font-size: 12px">
+          III INFORMACIÓN CONCRETA Y PRECISA DEL PEDIDO
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+        </button>
+
+
+      </div>
+
+      <div class="row">
+
+        <div class="col">
+          <textarea class="form-control text-uppercase "  rows="7" formControlName="solDInformacion" readonly></textarea>
+
+        </div>
+
+
+
+      </div>
+
+
+    </div>
+
+  </form>
+
+
+</div>

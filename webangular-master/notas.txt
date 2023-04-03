@@ -1,0 +1,3 @@
+npm uninstall ngx-pagination-bootstrap --save
+npm uninstall ngx-pagination --save
+npm uninstall ngx-bootstrap --save

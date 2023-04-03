@@ -1,0 +1,22 @@
+<div class="container p-5">
+  
+  <form [formGroup]="addNewPostForm"  (ngSubmit)="onPostFormSubmit()" >
+    
+    <div class="form-group">
+      <label >Respuesta del Requerimiento de Informacion</label>
+      <textarea class="form-control" formControlName="respuesta"  rows="8"
+      [ngClass]="{ 'is-invalid': submitted &amp;&amp; addNewPostForm.controls.respuesta.errors }" >
+
+      </textarea>
+      <div *ngIf="submitted &amp;&amp; addNewPostForm.controls.respuesta.errors" class="text-danger">
+          <div *ngIf="addNewPostForm.controls.respuesta.errors.required">Respuesta minina 30 caracteres</div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" data-dismiss="modal" (click)="activeModal.dismiss()">Cerrar</button>
+      <button type="submit"  class="btn btn-primary">Responder</button>
+  </div>
+
+  </form>
+</div>

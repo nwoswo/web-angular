@@ -1,0 +1,67 @@
+
+<div class="container p-3">
+  <div style="text-align: center" class="pb-2">
+      DOCUMENTOS ADJUNTADOS A LA SOLICITUD
+  </div>
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre Archivo</th>
+        <th scope="col" class="text-center">Archivo</th>
+        <th scope="col">Fecha Carga</th>
+        <th scope="col" class="text-center">Área</th>
+        <th scope="col" class="text-center">Borrar</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr *ngFor="let item of ltsoDArchivos ;let i=index">
+        <th scope="row">{{i+1}}</th>
+        <td > {{item.arcDNombre}}</td>
+        <td class="d-flex justify-content-center"><a  href="{{baseURL}}/sifonavic5/rest/archivos/downloadFile/{{item.arcCArchivo}}" target="_blank"> <i class="fa fa-file-text-o fa-lg" aria-hidden="true"></i></a></td>
+        <td>{{ item.arcFArchivo }}</td>
+        <td><p class="font-weight-bold text-center">          {{ item.areDNombre }}</p></td>
+        <td class="text-center">
+
+<!--
+          .{{solESolicitud}}. / {{item.arcCTipo}} /  {{rinEstado}}  /
+-->
+
+
+            <ng-template [ngIf]="(  (solESolicitud === 1  || solESolicitud === 10 ) && item.arcCTipo === 1) ">
+                <i class="fa fa-trash fa-2x" aria-hidden="true"  (click)="delete(item.arcCArchivo)" ></i>
+            </ng-template>
+
+
+            <ng-template [ngIf]="(solESolicitud === 6 && item.arcCTipo === 5 ) ">
+                <i class="fa fa-trash fa-2x" aria-hidden="true"  (click)="delete(item.arcCArchivo)"></i>
+            </ng-template>
+
+
+            <ng-template [ngIf]="(solESolicitud ===  100) ">
+                <i class="fa fa-trash fa-2x" aria-hidden="true"  (click)="delete(item.arcCArchivo)"></i>
+            </ng-template>
+
+
+            <ng-template [ngIf]="( solESolicitud===undefined && rinEstado!==undefined && rinEstado!==3 ) ">
+                <i class="fa fa-trash fa-2x" aria-hidden="true"  (click)="delete(item.arcCArchivo)"></i>
+            </ng-template>
+
+            <ng-template [ngIf]="(item.arcCTipo ===  5 && (solESolicitud===100  || solESolicitud===undefined) )  ">
+              <i class="fa fa-trash fa-2x" aria-hidden="true"  (click)="delete(item.arcCArchivo)"></i>
+            </ng-template>
+
+
+        </td>
+
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+
+<div class=" d-flex justify-content-end">
+        <button (click)="passBack()" type="submit" class="btn btn-light ">Cerrar Ventana</button>
+</div>

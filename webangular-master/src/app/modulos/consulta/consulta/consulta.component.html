@@ -1,0 +1,174 @@
+
+<div class="d-flex vh-50">
+    <div class="d-flex w-100 justify-content-center align-self-top">
+      <div class="card p-4" style="width: 50rem;">
+        <div class="container ">
+
+
+
+
+
+
+            <img class="card-img-top rounded mx-auto d-block" src="./assets/img/banner_logIn.png"
+              style="width: 243px; height: 120px;">
+            <hr>
+            <p class="h5 mb-4 text-center">CONSULTA SOLICITUD TRANSPARENCIA - FONAVI</p>
+
+            <!-- Email -->
+
+
+
+
+            <!-- Sign in button -->
+
+
+
+            <hr>
+
+
+            <div class=" d-flex justify-content-center">
+
+                <form class="form-inline"  id="add-form" [formGroup]="f"  (ngSubmit)="buscar()" novalidate>
+
+                    <div class="font-weight-bold" >
+                      <label  >Ingrese Hoja de Ruta</label>
+                    </div>
+
+                    <div class="px-4" >
+
+                      <input type="text" class="form-control"   formControlName="textbuscar"  [ngClass]="{ 'is-invalid':  f.controls.textbuscar.errors }" />
+
+                      <div *ngIf="f.controls.textbuscar.errors" class="invalid-feedback">
+                          <div *ngIf="f.controls.textbuscar.errors.minlength">Minimo 8 Caracteres Ejem: 2018-001</div>
+                      </div>
+
+                    </div>
+
+
+
+                    <button type="submit"   [disabled]="!f.valid" class="btn text-white" style="background-color: #3f729b;font-size: 12px" >Consultar</button>
+
+                  </form>
+
+            </div>
+
+
+          <div *ngIf="vsolicitudes.length>0" class="d-flex justify-content-center mt-5">
+            <table *ngFor="let item of vsolicitudes " class="table table-sm w-50 ">
+
+                <thead>
+                  <tr>
+
+                    <th scope="col" style="width: 10%">
+                      <p class="font-weight-bolder"> Hoja Ruta </p>
+                    </th>
+                    <th scope="col" style="width: 10%">
+                        <p> {{item.solNHoja}} </p>
+                    </th>
+
+
+
+                  </tr>
+
+                  <tr>
+
+                    <th scope="col" style="width: 10%">
+                        <p class="font-weight-bolder">Recibido </p>
+                      </th>
+                      <th scope="col" style="width: 10%">
+                          <p> {{item.solFRegistro}} </p>
+                      </th>
+                    </tr>
+
+                     <tr  >
+                        <th scope="col" style="width: 10%">
+                          <p class="font-weight-bolder">Proceso </p>
+                        </th>
+                        <th scope="col" style="width: 10%">
+                            <p> {{item.solFRegistro}} </p>
+                        </th>
+                      </tr>
+
+                      <tr *ngIf="item.solFRespuesta" >
+
+                          <th scope="col" style="width: 10%">
+                            <p class="font-weight-bolder">Por Entregar </p>
+                          </th>
+                          <th scope="col" style="width: 10%">
+                              <p> {{item.solFRespuesta}} </p>
+                          </th>
+                        </tr>
+
+
+
+                      <tr *ngIf="item.solFEntrega" >
+
+                            <th scope="col" style="width: 10%">
+                              <p class="font-weight-bolder">Entregado</p>
+                            </th>
+                            <th scope="col" style="width: 10%">
+                                <p> {{item.solFEntrega}} </p>
+                            </th>
+                        </tr>
+
+
+                      <tr >
+
+                          <th scope="col" style="width: 10%" colspan=2>
+
+                              <div *ngIf="item.solFEntrega"  class=" alert alert-success w-100 d-flex justify-content-center font-weight-bold mt-4" role="alert">
+                                  ENTREGADO
+                               </div>
+
+                               <div *ngIf="item.solFRespuesta &&  !item.solFEntrega"  class=" alert alert-success w-100 d-flex justify-content-center font-weight-bold mt-4" role="alert">
+                                  SOLICITUD ATENDIDA POR ENTREGAR
+                                </div>
+
+                                <div *ngIf=" item.solFRegistro && (item.solFRespuesta==null ||  !item.solFEntrega==null)"  class=" alert alert-success w-100 d-flex justify-content-center font-weight-bold mt-4" role="alert">
+                                   EN PROCESO
+                                  </div>
+
+
+                          </th>
+
+                      </tr>
+
+
+
+
+
+
+
+
+                </thead>
+                <tbody>
+
+                </tbody>
+              </table>
+
+
+
+
+            </div>
+
+
+
+
+            <hr>
+
+
+            <!-- Register -->
+
+            <div class="text-center">
+              <p>Secretaría Técnica FONAVI ®Todos los derechos reservados v
+               1.0.0</p>
+              <br>
+            </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
